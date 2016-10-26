@@ -1,0 +1,28 @@
+body{
+    background: orangered;
+    font-family: tahoma;
+    color: #989898;
+}
+
+#logoImg {
+  padding: 50px;
+}
+#whats {
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+#tweet {
+    text-decoration: none;
+    color: orangered;
+}
+
+
+#login-btn{
+
+  background: #fff;
+
+}
+.fa-twitter{
+  color: orangered;
+}
