@@ -15,29 +15,6 @@ router.get('/', function(req, res, next){
 
 });
 
-router.get( '/search', function( req, res ) {
-  var loc = req.query.location;
-  var params = { location: loc, sort: 2 };
-  yelp(params, function( error, response, body ) {
-    if ( error ) {
-      console.log( error );
-    } else {
-      var json = JSON.parse( body );
-      if (json.businesses === undefined) {
-        console.log('Location not recognised, redirecting to /');
-        res.redirect('/')
-        return;
-      };
-      if(!isLoggedIn){
-
-      res.render( 'user/events', { data: json, layout: 'pre' } );
-    } else {
-      res.render('user/eventslogged', { data: json})
-    }
-    }
-  });
-
-});
 
 router.get('/login', function(req, res, next){
   res.render('user/login', {layout: 'pre'});
@@ -57,9 +34,54 @@ router.get('/auth/twitter/callback',
     res.render('user/home');
 
   });
-router.get('/eventslogged', function(req,res,next){
-  res.render('user/eventslogged');
-});
+
+  router.get( '/search', function( req, res ) {
+    var loc = req.query.location;
+    var params = {terms: 'bar', location: loc, sort: 2 };
+    yelp(params, function( error, response, body ) {
+      if ( error ) {
+        console.log( error );
+      } else {
+        var json = JSON.parse( body );
+        if (json.businesses === undefined) {
+          console.log('Location not recognised, redirecting to /');
+          res.redirect('/')
+          return;
+        };
+
+
+        res.render( 'user/events', { data: json, layout: 'pre' } );
+
+      }
+    });
+
+  });
+  router.get( '/searchlogged', isLoggedIn, function( req, res ) {
+    var loc = req.query.location;
+    var params = {terms: 'bar', location: loc, sort: 2 };
+    yelp(params, function( error, response, body ) {
+      if ( error ) {
+        console.log( error );
+      } else {
+        var json = JSON.parse( body );
+        if (json.businesses === undefined) {
+          console.log('Location not recognised, redirecting to /');
+          res.redirect('/')
+          return;
+        };
+
+        res.render('user/eventslogged', { data: json})
+
+      }
+    });
+
+  });
+
+// router.get('/eventslogged', function(req,res,next){
+//   res.render('user/eventslogged');
+// });
+
+
 router.post('/process', function(req, res, next){
 
 
