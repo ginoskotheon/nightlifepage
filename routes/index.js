@@ -28,8 +28,6 @@ router.get( '/search', function( req, res ) {
         res.redirect('/')
         return;
       };
-      // console.log(json);
-      // res.send(json.businesses[0].location);
 
       res.render( 'user/events', { data: json, layout: 'pre' } );
     }
@@ -51,9 +49,11 @@ router.get('/auth/twitter/callback',
     res.render('home');
   });
 
-// router.get('/home', function(req, res, next){
-//   res.render('user/home');
-// });
+  router.get('/home', isLoggedIn, function(req, res){
+    res.render('user/home');
+
+  });
+
 
 router.get('/logout', function(req, res, next){
   req.logout();
@@ -61,3 +61,17 @@ router.get('/logout', function(req, res, next){
 });
 
 module.exports = router;
+function isLoggedIn (req, res, next) {
+	if (req.isAuthenticated()) {
+		return next();
+	}
+  res.redirect('/');
+}
+
+
+function notLoggedIn(req, res, next){
+  if(!req.isAuthenticated()){
+  return next();
+  }
+  res.redirect('/');
+}
