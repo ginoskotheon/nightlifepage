@@ -7,11 +7,12 @@
       <div class='yelp-box'>
         <img class="yelp-thumbnail" src="{{this.image_url}}">
         <h2 class="business-name">{{ this.name }}</h2>
-        <p class="business-description">{{this.snippet_text }}</p>
-        <br>
-        <form>
-          <input type="button" name='userAttendingVenue' value="0 Going" />
+        <form id="going">
+          <input  type="button" name='userAttendingVenue' value="0 Going" />
         </form>
+        <p class="business-description">{{this.snippet_text }}</p>
+
+
 
       </div>
     </div>
