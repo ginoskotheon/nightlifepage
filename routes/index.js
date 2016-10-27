@@ -15,27 +15,6 @@ router.get('/', function(req, res, next){
 
 });
 
-router.get( '/search', function( req, res ) {
-  var loc = req.query.location;
-  var params = { location: loc, sort: 2 };
-  yelp(params, function( error, response, body ) {
-    if ( error ) {
-      console.log( error );
-    } else {
-      var json = JSON.parse( body );
-      if (json.businesses === undefined) {
-        console.log('Location not recognised, redirecting to /');
-        res.redirect('/')
-        return;
-      };
-      // console.log(json);
-      // res.send(json.businesses[0].location);
-
-      res.render( 'user/events', { data: json, layout: 'pre' } );
-    }
-  });
-
-});
 
 router.get('/login', function(req, res, next){
   res.render('user/login', {layout: 'pre'});
@@ -47,7 +26,85 @@ router.get('/auth/twitter/callback',
   passportTwitter.authenticate('twitter', { failureRedirect: '/login' }),
   function(req, res) {
     // Successful authentication
-    res.json(req.user);
+
+    res.render('home');
   });
 
+  router.get('/home', isLoggedIn, function(req, res){
+    res.render('user/home');
+
+  });
+
+  router.get( '/search', function( req, res ) {
+    var loc = req.query.location;
+    var params = {terms: 'bar', location: loc, sort: 2 };
+    yelp(params, function( error, response, body ) {
+      if ( error ) {
+        console.log( error );
+      } else {
+        var json = JSON.parse( body );
+        if (json.businesses === undefined) {
+          console.log('Location not recognised, redirecting to /');
+          res.redirect('/')
+          return;
+        };
+
+
+        res.render( 'user/events', { data: json, layout: 'pre' } );
+
+      }
+    });
+
+  });
+  router.get( '/searchlogged', isLoggedIn, function( req, res ) {
+    var loc = req.query.location;
+    var params = {terms: 'bar', location: loc, sort: 2 };
+    yelp(params, function( error, response, body ) {
+      if ( error ) {
+        console.log( error );
+      } else {
+        var json = JSON.parse( body );
+        if (json.businesses === undefined) {
+          console.log('Location not recognised, redirecting to /');
+          res.redirect('/')
+          return;
+        };
+
+        res.render('user/eventslogged', { data: json})
+
+      }
+    });
+
+  });
+
+// router.get('/eventslogged', function(req,res,next){
+//   res.render('user/eventslogged');
+// });
+
+
+router.post('/process', function(req, res, next){
+
+
+    res.redirect('user/eventslogged');
+});
+
+router.get('/logout', function(req, res, next){
+  req.logout();
+  res.redirect('/');
+});
+
 module.exports = router;
+function isLoggedIn (req, res, next) {
+	if (req.isAuthenticated()) {
+		return next();
+	}
+  res.redirect('/');
+}
+
+
+function notLoggedIn(req, res, next){
+  if(!req.isAuthenticated()){
+  return next();
+  }
+  res.redirect('/');
+}

@@ -27,7 +27,7 @@ require('dotenv').load();
 // require('./config/passport')(passport);
 require('./config/passport2');
 
-// mongoose.connect('localhost:27017/nightlife');
+mongoose.connect('localhost:27017/nightlife');
 
 //view engine
 var handlebars = require('express-handlebars').create({defaultLayout: 'main'});

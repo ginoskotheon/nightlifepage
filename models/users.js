@@ -8,7 +8,8 @@ var User = new Schema({
     consumerKey: String,
     consumerSecret: String,
     callbackURL: String
-  }
+  },
+	venues: []
 });
 
 module.exports = mongoose.model('User', User);

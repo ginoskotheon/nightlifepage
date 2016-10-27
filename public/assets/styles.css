@@ -28,14 +28,45 @@ body{
 }
 
 #loggingin {
+  padding-top: 20px;
   float: right;
   color: #fff;
 
 }
 
 #log {
-  padding-top: 20px;
+
   color: #fff;
   text-decoration: none;
   cursor: pointer;
+}
+.yelp-box {
+  display: flex;
+  color: #fff;
+}
+
+.business-name{
+  display: flex;
+  margin-right: 10px;
+  font-size: 26px;
+  /*max-width: 150px;*/
+  min-width: 150px;
+}
+.yelp-thumbnail {
+  border: 3px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0px 5px 10px rgba(0,0,0,0.5);
+  margin-right: 10px;
+}
+.business-description{
+  line-height: 30px;
+  margin-left: 40px;
+  margin-top: 20px;
+}
+#going{
+  position: absolute;
+  margin-left: 1000px;
+  margin-top: 90px;
+
+  color: orangered;
 }

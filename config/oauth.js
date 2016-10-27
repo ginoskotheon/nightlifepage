@@ -18,6 +18,7 @@ var request_yelp = function(set_parameters, callback) {
 
   /* We can setup default parameters here */
   var default_parameters = {
+    term: 'bars',
     location: 'San+Antonio',
     sort: '2'
   };

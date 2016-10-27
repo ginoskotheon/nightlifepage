@@ -3,9 +3,7 @@ var router = express.Router();
 var cookieParser = require('cookie-parser');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
-
-var Vote = require('../models/vote');
-var User2 = require('../models/user2');
+var User2 = require('../models/users');
 var csrf = require('csurf');
 var session = require('express-session');
 var passport = require('passport');
@@ -15,6 +13,11 @@ router.use(csrf());
 
 router.get('/', function(req, res){
   res.render('/');
+
+});
+
+router.get('/home', isLoggedIn, function(req, res){
+  res.render('user/home');
 
 });
 
