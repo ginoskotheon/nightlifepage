@@ -26,3 +26,16 @@ body{
 .fa-twitter{
   color: orangered;
 }
+
+#loggingin {
+  float: right;
+  color: #fff;
+
+}
+
+#log {
+  padding-top: 20px;
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+}

@@ -13,8 +13,8 @@ var bcrypt = require('bcryptjs');
 
 router.use(csrf());
 
-router.get('/home', function(req, res){
-  res.render('user/home');
+router.get('/', function(req, res){
+  res.render('/');
 
 });
 
