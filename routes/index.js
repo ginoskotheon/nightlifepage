@@ -28,8 +28,12 @@ router.get( '/search', function( req, res ) {
         res.redirect('/')
         return;
       };
+      if(!isLoggedIn){
 
       res.render( 'user/events', { data: json, layout: 'pre' } );
+    } else {
+      res.render('user/eventslogged', { data: json})
+    }
     }
   });
 
@@ -45,15 +49,22 @@ router.get('/auth/twitter/callback',
   passportTwitter.authenticate('twitter', { failureRedirect: '/login' }),
   function(req, res) {
     // Successful authentication
-    // res.json(req.user);
-    res.render('user/home');
+
+    res.render('home');
   });
 
   router.get('/home', isLoggedIn, function(req, res){
     res.render('user/home');
 
   });
+router.get('/eventslogged', function(req,res,next){
+  res.render('user/eventslogged');
+});
+router.post('/process', function(req, res, next){
 
+
+    res.redirect('user/eventslogged');
+});
 
 router.get('/logout', function(req, res, next){
   req.logout();
