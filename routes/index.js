@@ -7,6 +7,7 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var yelp = require( '../config/oauth' );
 var passportTwitter = require('../config/passport2');
+var User = require('../models/users');
 
 
 router.get('/', function(req, res, next){
@@ -79,8 +80,9 @@ router.get('/auth/twitter/callback',
 
 
 router.post('/process/:bar', isLoggedIn, function(req, res, next){
-  console.log(req.user);
-  console.log(req.params.bar);
+ User.findOneAndUpdate({'name': req.user}).then(function(user){
+   user.venues.push(bar);
+ })
   
 
 });
