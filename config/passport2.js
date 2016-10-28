@@ -38,6 +38,30 @@ passport.use(new TwitterStrategy({
       } else {
         return done(null, user);
       }
+    });User.findOneAndUpdate(searchQuery, updates, options, function(err, user) {
+      if(err) {
+        return done(err);
+      }
+
+      if (user) {
+        return done(null, user);
+      } else {
+        var newUser = new User();
+
+        newUser.user = profile.displayName;
+        newUser.id = profile.id;
+        venues = [];
+
+
+
+        newUser.save(function (err) {
+          if (err) {
+            throw err;
+          }
+
+          return done(null, newUser);
+        });
+      }
     });
   }
 
