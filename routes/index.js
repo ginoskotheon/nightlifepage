@@ -77,21 +77,11 @@ router.get('/auth/twitter/callback',
 
   });
 
-// router.get('/eventslogged', function(req,res,next){
-//   res.render('user/eventslogged');
-// });
-
 
 router.post('/process/:bar', isLoggedIn, function(req, res, next){
   console.log(req.user);
   console.log(req.params.bar);
-  var person = {
-    user: req.user,
-    venues: []
-  }
-
-  var user = new User(person);
-  user.save();
+  
 
 });
 
