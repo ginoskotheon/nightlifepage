@@ -80,6 +80,7 @@ router.get('/auth/twitter/callback',
 
 
 router.post('/process/:bar', isLoggedIn, function(req, res, next){
+  console.log(req.params.bar);
  User.findOneAndUpdate({'name': req.user}).then(function(user){
    user.venues.push(res.params.bar);
  })
