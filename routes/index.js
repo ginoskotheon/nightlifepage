@@ -82,10 +82,17 @@ router.get('/auth/twitter/callback',
 // });
 
 
-router.post('/process', function(req, res, next){
+router.post('/process/:bar', isLoggedIn, function(req, res, next){
+  console.log(req.user);
+  console.log(req.params.bar);
+  var person = {
+    user: req.user,
+    venues: []
+  }
 
+  var user = new User(person);
+  user.save();
 
-    res.redirect('user/eventslogged');
 });
 
 router.get('/logout', function(req, res, next){
