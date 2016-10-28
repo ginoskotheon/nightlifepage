@@ -27,7 +27,7 @@ router.get('/auth/twitter/callback',
   function(req, res) {
     // Successful authentication
 
-    res.render('home');
+    res.render('user/home');
   });
 
   router.get('/home', isLoggedIn, function(req, res){
