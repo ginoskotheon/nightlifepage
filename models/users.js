@@ -7,7 +7,7 @@ var User = new Schema({
 	twitter: {
     consumerKey: String,
     consumerSecret: String,
-    callbackURL: 'https://glacial-coast-36974.herokuapp.com/auth/twitter/callback'
+    callbackURL: String
   },
   user: String,
 	id: String,
