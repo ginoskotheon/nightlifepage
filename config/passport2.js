@@ -43,10 +43,9 @@ passport.use(new TwitterStrategy({
       } else {
         var newUser = new User();
 
-        newUser.user = profile.displayName;
-        newUser.id = profile.id;
+        newUser.twitter.name = profile.displayName;
+        newUser.twitter.someID = profile.id;
         venues = [];
-
 
 
         newUser.save(function (err) {
