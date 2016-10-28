@@ -4,11 +4,9 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var User = new Schema({
-	twitter: {
-    user: String,
-	  id: String,
-  },
-  
+
+    name: String,
+	someID: String,
 	venues: []
 });
 
