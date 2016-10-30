@@ -84,7 +84,7 @@ router.get('/auth/twitter/callback',
 router.post('/process/:bar', isLoggedIn, function(req, res, next){
   console.log(req.params.bar);
   console.log(req.user.name);
- User.findOneAndUpdate({'_id': objectId}, {$push: {'venues.$': req.params.bar}})
+ User.findOneAndUpdate({'name': req.user.name}, {$push: {'venues.$': req.params.bar}})
  User.find({}, function(doc){
    console.log(JSON.stringify(doc));
  }); 
