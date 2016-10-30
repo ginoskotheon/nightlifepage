@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var yelp = require( '../config/oauth' );
 var passportTwitter = require('../config/passport2');
 var User = require('../models/users');
+var session = require('express-session');
 
 
 router.get('/', function(req, res, next){
