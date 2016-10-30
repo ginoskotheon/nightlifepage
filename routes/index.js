@@ -81,11 +81,12 @@ router.get('/auth/twitter/callback',
 
 
 router.post('/process/:bar', isLoggedIn, function(req, res, next){
-//   console.log(req.user._id);
+  console.log('hiiiii!');
 //  User.findOneAndUpdate({'name': req.user.name}, {$push: {'venues': req.params.bar}})
- User.find({}).then(function(doc){
+ User.find({}, function(doc){
    console.log(doc);
  }); 
+ res.redirect(303, 'home');
 
 });
 
