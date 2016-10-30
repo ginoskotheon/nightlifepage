@@ -4,6 +4,7 @@ var router = express.Router();
 var cookieParser = require('cookie-parser');
 var request = require('request');
 var mongoose = require('mongoose');
+var objectId = new mongoose.Types.ObjectId;
 var bodyParser = require('body-parser');
 var yelp = require( '../config/oauth' );
 var passportTwitter = require('../config/passport2');
@@ -82,11 +83,11 @@ router.get('/auth/twitter/callback',
 
 router.post('/process/:bar', isLoggedIn, function(req, res, next){
   console.log('hiiiii!');
-//  User.findOneAndUpdate({'name': req.user.name}, {$push: {'venues': req.params.bar}})
+ User.findOneAndUpdate({'_id': objectId}, {$push: {'venues': req.params.bar}})
  User.find({}, function(doc){
    console.log(doc);
  }); 
- res.redirect(303, 'home');
+ res.render('user/home');
 
 });
 
