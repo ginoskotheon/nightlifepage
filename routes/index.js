@@ -85,7 +85,10 @@ router.post('/process/:bar', isLoggedIn, function(req, res, next){
   console.log(req.params.bar);
   console.log(req.user.name);
   console.log(req.user.venues);
- User.findOneAndUpdate({'name': req.user.name}, { $push: {'venues': req.params.bar}} , {new: true})
+ User.findOneAndUpdate({name: req.user.name}, { $push: {venues: req.params.bar}} , {upsert: true}, function(){
+   if(err)throw err;
+   console.log(doc);
+ });
 
  res.render('user/home');
 
