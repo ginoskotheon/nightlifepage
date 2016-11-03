@@ -74,7 +74,7 @@ router.get('/auth/twitter/callback',
           res.redirect('/')
           return;
         };
-        console.log(json);
+     
         res.render('user/eventslogged', { data: json})
       }
     });
@@ -88,12 +88,15 @@ router.post('/process/:bar', isLoggedIn, function(req, res, next){
 
  User.findOneAndUpdate({name: req.user.name}, { $addToSet: {venues: req.params.bar}} , {safe: true, upsert: true, new: true}, function(err){
    if(err)throw err;
+   res.render('/searchlogged');
    
-   res.render('user/home');
  });
 
 });
 
+router.get('/eventslogged', isLoggedIn, function(req, res, next){
+  res.render('user/eventslogged')
+});
 
 
 router.get('/logout', function(req, res, next){
