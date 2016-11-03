@@ -84,7 +84,7 @@ router.post('/process/:bar', isLoggedIn, function(req, res, next){
   console.log(req.params.bar);
   console.log(req.user.name);
   console.log(req.user.venues);
-  // req.session.bar = req.params.bar
+
  User.findOneAndUpdate({name: req.user.name}, { $addToSet: {venues: req.params.bar}} , {safe: true, upsert: true, new: true}, function(err){
    if(err)throw err;
    

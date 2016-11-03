@@ -46,7 +46,7 @@ app.use(session({
   secret: 'twitterRouter',
   resave: false,
   saveUnintialized: false,
-  cookie: {secure: true,
+  cookie: {secure: false,
   maxAge: 180 * 60 * 1000}
 }));
 
