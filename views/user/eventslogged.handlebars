@@ -1,7 +1,7 @@
 
 <h1 id='whats'>What's on in {{data.businesses.0.location.city}}! </h1>
 
-  {{#each data.businesses}}
+{{#each data.businesses}}
   <div class='yelp-output'>
     <div class='yelp-item'>
       <div class='yelp-box'>
@@ -11,9 +11,6 @@
             <input class="decision" id="decision" type="button" name='userAttendingVenue' value="Not Going" />
         </form>
         <p class="business-description">{{this.snippet_text }}</p>
-
-
-
       </div>
     </div>
   </div>

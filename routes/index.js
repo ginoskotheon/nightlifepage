@@ -72,9 +72,7 @@ router.get('/auth/twitter/callback',
           res.redirect('/')
           return;
         };
-
         res.render('user/eventslogged', { data: json})
-
       }
     });
 
@@ -86,11 +84,13 @@ router.post('/process/:bar', isLoggedIn, function(req, res, next){
   console.log(req.user.venues);
  User.findOneAndUpdate({name: req.user.name}, { $addToSet: {venues: req.params.bar}} , {safe: true, upsert: true, new: true}, function(err){
    if(err)throw err;
-   console.log('hello!');
+   console.log(res.user.venues)
    res.render('user/home');
  });
 
 });
+
+
 
 router.get('/logout', function(req, res, next){
   req.logout();
