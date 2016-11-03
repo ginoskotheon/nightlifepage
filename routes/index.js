@@ -79,8 +79,7 @@ router.get('/auth/twitter/callback',
     });
 
   });
-
-
+  
 router.post('/process/:bar', isLoggedIn, function(req, res, next){
   console.log(req.params.bar);
   console.log(req.user.name);
@@ -90,8 +89,6 @@ router.post('/process/:bar', isLoggedIn, function(req, res, next){
    console.log('hello!');
    res.render('user/home');
  });
-
- 
 
 });
 
