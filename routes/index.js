@@ -74,6 +74,7 @@ router.get('/auth/twitter/callback',
           res.redirect('/')
           return;
         };
+        console.log(json);
         res.render('user/eventslogged', { data: json})
       }
     });
