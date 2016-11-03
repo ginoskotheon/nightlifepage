@@ -45,7 +45,7 @@ app.use(cookieParser());
 app.use(session({
   secret: 'twitterRouter',
   resave: false,
-  saveUnintialized: false,
+  saveUnintialized: true,
   cookie: {secure: false,
   maxAge: 180 * 60 * 1000}
 }));
