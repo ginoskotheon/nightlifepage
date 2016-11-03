@@ -11,7 +11,8 @@ var passportTwitter = require('../config/passport2');
 var User = require('../models/users');
 var session = require('express-session');
 
-app.use(bodyParser.json());
+router.use(bodyParser.json());
+
 router.get('/', function(req, res, next){
 
   res.render('index', {title: 'index', layout: 'pre'});
