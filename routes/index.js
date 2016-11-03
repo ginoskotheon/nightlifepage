@@ -1,7 +1,7 @@
 require('dotenv').config();
 var express = require('express');
 var router = express.Router();
-var app = require('../server.js');
+
 var cookieParser = require('cookie-parser');
 var request = require('request');
 var mongoose = require('mongoose');
@@ -12,7 +12,7 @@ var passportTwitter = require('../config/passport2');
 var User = require('../models/users');
 var session = require('express-session');
 
-app.use(bodyParser.json());
+
 
 router.get('/', function(req, res, next){
 
