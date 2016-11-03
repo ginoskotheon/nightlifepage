@@ -47,7 +47,7 @@ app.use(session({
   secret: 'twitterRouter',
   resave: false,
   saveUnintialized: false,
-  store: new MongoStore({mongooseConnection: mongoose.connection})
+  store: new MongoStore({mongooseConnection: mongoose.connection}),
   cookie: {secure: false,
   maxAge: 180 * 60 * 1000}
 }));
