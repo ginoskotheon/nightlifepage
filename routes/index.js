@@ -62,7 +62,7 @@ router.get('/auth/twitter/callback',
     });
 
   });
-  router.get( '/searchlogged', isLoggedIn, function( req, res ) {
+  router.get( '/eventslogged', isLoggedIn, function( req, res ) {
     var loc = req.query.location;
     var params = {terms: 'bar', location: loc, sort: 2 };
     yelp(params, function( error, response, body ) {
