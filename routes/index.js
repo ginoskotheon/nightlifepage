@@ -132,6 +132,7 @@ router.post('/process', isLoggedIn, function(req, res, next){
     }
 
   });
+  res.redirect('back');
 });
 
 router.get('/eventslogged', isLoggedIn, function(req, res, next){
