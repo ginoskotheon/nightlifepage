@@ -96,3 +96,41 @@ body{
 
   color: orangered;
 }
+
+.preinfo {
+  display: flex;
+  line-height: 30px;
+  margin-left: 40px;
+  margin-top: 20px;
+}
+.preinfo .business-address {
+  display: none;
+
+}
+.preinfo:hover .business-description {
+  display: none;
+
+}
+.preinfo:hover .business-address {
+  display: inline;
+
+}
+/*.business-description{
+
+  line-height: 30px;
+  margin-left: 40px;
+  margin-top: 20px;
+
+}
+.business-description:hover{
+  opacity: 0;
+}*/
+
+
+.pregoing{
+  position: absolute;
+  margin-left: 1000px;
+  margin-top: 90px;
+
+  color: orangered;
+}
