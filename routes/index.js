@@ -124,11 +124,11 @@ router.post('/process', isLoggedIn, function(req, res, next){
 
     console.log("Result: ", JSON.stringify(result));
     if (ans === "Going"){
-      Bars.update({"venues.name": req.body.yelpId}, { "$set": {"venues.$.going": true}}).then(function(result){
+      Bars.update({"location": location, "venues.name": req.body.yelpId}, { "$set": {"venues.$.going": true}}).then(function(result){
         console.log("1st Ans: ", result);
       });
     } else {
-      Bars.update({"venues.name": req.body.yelpId}, { "$set": {"venues.$.going": false}}).then(function(result){
+      Bars.update({"location": location, "venues.name": req.body.yelpId}, { "$set": {"venues.$.going": false}}).then(function(result){
         console.log("2nd Ans: ", result);
         });
     }
