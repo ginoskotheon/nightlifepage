@@ -124,7 +124,7 @@ router.post('/process', isLoggedIn, function(req, res, next){
 
     console.log("Result: ", JSON.stringify(result));
     if (ans === "Going"){
-      Bars.update({"user": req.user, "location": location, "venues.name": req.body.yelpId}, { "$set": {"venues.$.going": true, upsert: true}}).then(function(result){
+      Bars.update({"user": req.user, "location": location, "venues.name": req.body.yelpId}, { "$set": {"venues.$.going": true}}).then(function(result){
         console.log("1st Ans: ", result);
       });
     } else {
