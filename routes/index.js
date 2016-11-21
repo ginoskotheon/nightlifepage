@@ -9,6 +9,7 @@ var objectId = new mongoose.Schema.ObjectId;
 var bodyParser = require('body-parser');
 var yelp = require( '../config/oauth' );
 var passportTwitter = require('../config/passport2');
+var Bars = require('../models/my_places');
 var User = require('../models/users');
 var session = require('express-session');
 
@@ -40,7 +41,7 @@ router.get('/auth/twitter/callback',
 
   });
 
-  router.get( '/search', function( req, res ) {
+  router.get( '/events', function( req, res ) {
     var loc = req.query.location;
     var params = {terms: 'bar', location: loc, sort: 2 };
     yelp(params, function( error, response, body ) {
@@ -69,30 +70,68 @@ router.get('/auth/twitter/callback',
         console.log( error );
       } else {
         var json = JSON.parse( body );
+        req.session.body = body;
+        var searchResults = req.session.body;
+        // console.log(JSON.stringify(json));
         if (json.businesses === undefined) {
           console.log('Location not recognised, redirecting to /');
           res.redirect('/')
           return;
         };
-     
-        res.render('user/eventslogged', { data: json})
-      }
+        var locs = [];
+        var locations = [];
+        json.businesses.forEach(function(element){
+
+
+        locs.push({"name": element.id, "going": false});
+        locations.push(element.id);
+
+          });
+        var listoBars = {
+          user: req.user,
+          location: json.businesses[0].location.city,
+          venues: locs
+          }
+        };
+        // console.log(locations);
+        var searchedBars = new Bars(listoBars);
+
+        searchedBars.save();
+        // console.log(JSON.stringify(searchedBars));
+        var savedSearch = [];
+        Bars.findOne({"location": json.businesses[0].location.city }).then(function(result){
+          result.venues.forEach(function(place){
+            // console.log(place.name);
+            savedSearch.push({"name": place.name, "going": place.going});
+          });
+          // console.log(savedSearch);
+          res.render( 'user/eventslogged', { data: json, going: savedSearch, layout: 'pre' } );
+        });
     });
 
   });
+
   
-router.post('/process/:bar', isLoggedIn, function(req, res, next){
-  console.log(req.params.bar);
-  console.log(req.user.name);
-  console.log(req.user.venues);
+router.post('/process', isLoggedIn, function(req, res, next){
+  var ans = req.body.userAttendingVenue;
+  // console.log(ans);
+  // console.log(req.body.yelpId);
+  var location = req.body.location;
+  // console.log(location);
+  Bars.findOne({"user": "William", location: location, "venues.name": req.body.yelpId}).then(function(result){
 
- User.findOneAndUpdate({name: req.user.name}, { $addToSet: {venues: req.params.bar}} , {safe: true, upsert: true, new: true}, function(err){
-   if(err)throw err;
-   res.render('/searchlogged');
-   
- });
+    // console.log("Result: ", JSON.stringify(result));
+    if (ans === "Going"){
+      Bars.update({"user": "William", "venues.name": req.body.yelpId}, { "$set": {"venues.$.going": true, upsert: true}}).then(function(result){
+        console.log("1st Ans: ", result);
+      });
+    } else {
+      Bars.update({"user": "William", "venues.name": req.body.yelpId}, { "$set": {"venues.$.going": false}}).then(function(result){
+        console.log("2nd Ans: ", result);
+        });
+    }
 
-});
+  });
 
 router.get('/eventslogged', isLoggedIn, function(req, res, next){
   res.render('user/eventslogged')

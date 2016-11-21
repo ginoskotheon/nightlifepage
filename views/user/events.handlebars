@@ -10,7 +10,11 @@
         <img class="yelp-thumbnail" src="{{this.image_url}}">
         <h2 class="business-name">{{ this.name }}</h2>
 
-        <p class="business-description">{{this.snippet_text }}</p>
+        <a href="/login"><input class="predecision" id="predecision" type="button" name='preuserAttendingVenue' value="Not Going" /></a>
+        <div class="info">
+          <p class="business-description">{{this.snippet_text }}</p>
+          <p class="business-address">{{this.location.display_address}}</p>
+        </div>
 
 
 

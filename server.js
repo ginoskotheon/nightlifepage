@@ -28,14 +28,52 @@ require('dotenv').load();
 // require('./config/passport')(passport);
 require('./config/passport2');
 
-mongoose.connect(process.env.MONGO_URI);
-
-
+mongoose.connect('localhost:27017/nightlife');
 
 //view engine
-var handlebars = require('express-handlebars').create({defaultLayout: 'main'});
+var handlebars = require('express-handlebars').create({
+  helpers: {
+    equal: function(lvalue, rvalue, options){
+      if(arguments.length < 3) {
+      throw new Error("Handlebars needs to parameters");
+
+      }
+      if(lvalue!=rvalue){
+        return options.inverse(this);
+      } else {
+        return options.fn(this);
+      }
+    },
+    test: function(){return "hello!"}
+  },
+  defaultLayout: 'main'
+
+  });
+
+var handhelp = require('express-handlebars').create({
+  helpers: {
+    equal: function(lvalue, rvalue, options){
+      if(arguments.length < 3) {
+      throw new Error("Handlebars needs to parameters");
+
+      }
+      if(lvalue!=rvalue){
+        return options.inverse(this);
+      } else {
+        return options.fn(this);
+      }
+    },
+    test: function(){return 'Hello!'}
+  },
+
+  defaultLayout: 'main'
+});
+
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
+
+
+
 
 // middle ware
 // app.use(logger('dev'));
