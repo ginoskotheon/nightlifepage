@@ -118,15 +118,15 @@ router.post('/process', isLoggedIn, function(req, res, next){
   // console.log(req.body.yelpId);
   var location = req.body.location;
   // console.log(location);
-  Bars.findOne({"user": "William", location: location, "venues.name": req.body.yelpId}).then(function(result){
+  Bars.findOne({"user": req.user, location: location, "venues.name": req.body.yelpId}).then(function(result){
 
     // console.log("Result: ", JSON.stringify(result));
     if (ans === "Going"){
-      Bars.update({"user": "William", "venues.name": req.body.yelpId}, { "$set": {"venues.$.going": true, upsert: true}}).then(function(result){
+      Bars.update({"user": req.user, "venues.name": req.body.yelpId}, { "$set": {"venues.$.going": true, upsert: true}}).then(function(result){
         console.log("1st Ans: ", result);
       });
     } else {
-      Bars.update({"user": "William", "venues.name": req.body.yelpId}, { "$set": {"venues.$.going": false}}).then(function(result){
+      Bars.update({"user": req.user, "venues.name": req.body.yelpId}, { "$set": {"venues.$.going": false}}).then(function(result){
         console.log("2nd Ans: ", result);
         });
     }
