@@ -21,27 +21,7 @@ router.get('/', function(req, res, next){
 
 });
 
-
-router.get('/login', function(req, res, next){
-  res.render('user/login', {layout: 'pre'});
-});
-
-router.get('/auth/twitter', passportTwitter.authenticate('twitter'));
-
-router.get('/auth/twitter/callback',
-  passportTwitter.authenticate('twitter', { failureRedirect: '/login' }),
-  function(req, res) {
-    // Successful authentication
-
-    res.render('user/home');
-  });
-
-  router.get('/home', isLoggedIn, function(req, res){
-    res.render('user/home');
-
-  });
-
-  router.get( '/events', function( req, res ) {
+router.get( '/events', function( req, res ) {
     var loc = req.query.location;
     var params = {terms: 'bar', location: loc, sort: 2 };
     yelp(params, function( error, response, body ) {
@@ -62,6 +42,31 @@ router.get('/auth/twitter/callback',
     });
 
   });
+
+router.get('/login', function(req, res, next){
+  res.render('user/login', {layout: 'pre'});
+});
+
+router.get('/auth/twitter', passportTwitter.authenticate('twitter'));
+
+router.get('/auth/twitter/callback',
+  passportTwitter.authenticate('twitter', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication
+
+    res.render('user/home');
+  });
+
+
+
+
+  router.get('/home', isLoggedIn, function(req, res){
+    res.render('user/home');
+
+  });
+
+  
+
   router.get( '/eventslogged', isLoggedIn, function( req, res ) {
     var loc = req.query.location;
     var params = {terms: 'bar', location: loc, sort: 2 };
