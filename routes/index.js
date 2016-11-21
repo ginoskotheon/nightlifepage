@@ -97,7 +97,7 @@ router.get('/auth/twitter/callback',
         var searchedBars = new Bars(listoBars);
 
         searchedBars.save();
-        // console.log(JSON.stringify(searchedBars));
+        console.log(JSON.stringify(searchedBars.user));
         var savedSearch = [];
         Bars.findOne({"location": json.businesses[0].location.city }).then(function(result){
           result.venues.forEach(function(place){
