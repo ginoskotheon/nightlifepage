@@ -115,6 +115,8 @@ router.get('/auth/twitter/callback',
 router.post('/process', isLoggedIn, function(req, res, next){
   var ans = req.body.userAttendingVenue;
   console.log(ans);
+  var aUser = req.user;
+  console.log(aUser);
   // console.log(req.body.yelpId);
   var location = req.body.location;
   // console.log(location);
