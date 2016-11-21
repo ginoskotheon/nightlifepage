@@ -54,7 +54,7 @@ router.get('/auth/twitter/callback',
   function(req, res) {
     // Successful authentication
 
-    res.render('user/eventslogged');
+    res.render('home');
   });
 
 
