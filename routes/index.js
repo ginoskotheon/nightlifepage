@@ -142,9 +142,9 @@ router.post('/process', isLoggedIn, function(req, res, next){
   res.redirect('back');
 });
 
-router.get('/eventslogged', isLoggedIn, function(req, res, next){
-  res.render('user/eventslogged')
-});
+// router.get('/eventslogged', isLoggedIn, function(req, res, next){
+//   res.render('user/eventslogged')
+// });
 
 
 router.get('/logout', function(req, res, next){
