@@ -122,7 +122,7 @@ router.post('/process', isLoggedIn, function(req, res, next){
   // console.log(location);
   Bars.findOne({"user": req.user, "location": location}).then(function(result){
 
-    // console.log("Result: ", JSON.stringify(result));
+    console.log("Result: ", JSON.stringify(result));
     if (ans === "Going"){
       Bars.update({"user": req.user, "location": location, "venues.name": req.body.yelpId}, { "$set": {"venues.$.going": true, upsert: true}}).then(function(result){
         console.log("1st Ans: ", result);
