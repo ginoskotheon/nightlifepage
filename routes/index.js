@@ -132,6 +132,7 @@ router.post('/process', isLoggedIn, function(req, res, next){
     }
 
   });
+});
 
 router.get('/eventslogged', isLoggedIn, function(req, res, next){
   res.render('user/eventslogged')
@@ -144,6 +145,7 @@ router.get('/logout', function(req, res, next){
 });
 
 module.exports = router;
+
 function isLoggedIn (req, res, next) {
 	if (req.isAuthenticated()) {
 		return next();
