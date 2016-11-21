@@ -105,7 +105,7 @@ router.get('/auth/twitter/callback',
             savedSearch.push({"name": place.name, "going": place.going});
           });
           // console.log(savedSearch);
-          res.render( 'user/eventslogged', { data: json, going: savedSearch, layout: 'pre' } );
+          res.render( 'user/eventslogged', { data: json, going: savedSearch} );
         });
     });
 
@@ -118,7 +118,7 @@ router.post('/process', isLoggedIn, function(req, res, next){
   // console.log(req.body.yelpId);
   var location = req.body.location;
   // console.log(location);
-  Bars.findOne({"user": req.user, location: location, "venues.name": req.body.yelpId}).then(function(result){
+  Bars.findOne({"user": req.user, location: location}).then(function(result){
 
     // console.log("Result: ", JSON.stringify(result));
     if (ans === "Going"){
