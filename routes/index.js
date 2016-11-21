@@ -54,7 +54,7 @@ router.get('/auth/twitter/callback',
   function(req, res) {
     // Successful authentication
 
-    res.render('user/home');
+    res.render('user/eventslogged');
   });
 
 
@@ -158,7 +158,7 @@ function isLoggedIn (req, res, next) {
 	if (req.isAuthenticated()) {
 		return next();
 	}
-  res.redirect('/eventslogged');
+  res.redirect('/');
 }
 
 
