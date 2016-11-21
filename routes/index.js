@@ -117,7 +117,7 @@ router.post('/process', isLoggedIn, function(req, res, next){
   console.log(ans);
   var aUser = req.user;
   console.log("Dude: ", aUser);
-  // console.log(req.body.yelpId);
+  console.log("yelp: ", req.body.yelpId);
   var location = req.body.location;
   // console.log(location);
   Bars.findOne({"user": req.user, "location": location}).then(function(result){
