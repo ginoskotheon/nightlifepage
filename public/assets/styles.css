@@ -1,11 +1,21 @@
 body{
     background: orangered;
     font-family: tahoma;
-    color: #989898;
+    color: #fff;
 }
 
-.navbar-header {
+.navbar{
+  border: none;
+  color: #fff;
   background: orangered;
+}
+
+.nav.navbar-nav.navbar-right li a{
+  color: #fff;
+}
+
+.nav.navbar-nav li a{
+  color: #fff;
 }
 
 #logoImg {
@@ -94,44 +104,6 @@ body{
 
 
 .going{
-  position: absolute;
-  margin-left: 1000px;
-  margin-top: 90px;
-
-  color: orangered;
-}
-
-.preinfo {
-  display: flex;
-  line-height: 30px;
-  margin-left: 40px;
-  margin-top: 20px;
-}
-.preinfo .business-address {
-  display: none;
-
-}
-.preinfo:hover .business-description {
-  display: none;
-
-}
-.preinfo:hover .business-address {
-  display: inline;
-
-}
-/*.business-description{
-
-  line-height: 30px;
-  margin-left: 40px;
-  margin-top: 20px;
-
-}
-.business-description:hover{
-  opacity: 0;
-}*/
-
-
-.pregoing{
   position: absolute;
   margin-left: 1000px;
   margin-top: 90px;
