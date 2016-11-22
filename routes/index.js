@@ -60,8 +60,6 @@ router.get('/auth/twitter/callback',
   });
 
 
-
-
   router.get('/home', isLoggedIn, function(req, res){
     res.render('user/home');
 
@@ -148,7 +146,7 @@ router.post('/process', isLoggedIn, function(req, res, next){
   res.redirect('back');
 });
 
-router.get('/eventslogged', isLoggedIn, function(req, res, next){
+router.get('/eventslogged', function(req, res, next){
   res.render('user/eventslogged', { ref_path: req.query.ref })
 });
 
