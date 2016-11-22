@@ -4,6 +4,10 @@ body{
     color: #fff;
 }
 
+#location {
+  color: #666;
+}
+
 .navbar{
   border: none;
   color: #fff;
