@@ -64,7 +64,7 @@ router.get('/auth/twitter/callback',
     console.log(path);
     // Successful authentication
     console.log('success!');
-    res.redirect('origin');
+    res.redirect('back');
     // res.render('user/home');
   });
 
