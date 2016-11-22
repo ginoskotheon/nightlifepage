@@ -32,7 +32,43 @@ require('./config/passport2');
 mongoose.connect(process.env.MONGO_URI);
 
 //view engine
+var handlebars = require('express-handlebars').create({
+  helpers: {
+    equal: function(lvalue, rvalue, options){
+      if(arguments.length < 3) {
+      throw new Error("Handlebars needs to parameters");
 
+      }
+      if(lvalue!=rvalue){
+        return options.inverse(this);
+      } else {
+        return options.fn(this);
+      }
+    },
+    test: function(){return "hello!"}
+  },
+  defaultLayout: 'main'
+
+  });
+
+var handhelp = require('express-handlebars').create({
+  helpers: {
+    equal: function(lvalue, rvalue, options){
+      if(arguments.length < 3) {
+      throw new Error("Handlebars needs to parameters");
+
+      }
+      if(lvalue!=rvalue){
+        return options.inverse(this);
+      } else {
+        return options.fn(this);
+      }
+    },
+    test: function(){return 'Hello!'}
+  },
+
+  defaultLayout: 'main'
+});
 
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
@@ -55,6 +91,7 @@ app.use(session({
   maxAge: 180 * 60 * 1000}
 }));
 app.use(back());
+
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
