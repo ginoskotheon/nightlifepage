@@ -68,7 +68,7 @@ router.get('/auth/twitter/callback',
 
   
 
-  router.get( '/eventslogged', isLoggedIn, function( req, res ) {
+  router.get( '/eventslogged', function( req, res ) {
 
     var loc = req.query.location;
     var params = {terms: 'bar', location: loc, sort: 2 };
@@ -120,6 +120,9 @@ router.get('/auth/twitter/callback',
 
   
 router.post('/process', isLoggedIn, function(req, res, next){
+  if(!isLoggedIn){
+    res.redirect('/login');
+  }
   var ans = req.body.userAttendingVenue;
   console.log(ans);
   var aUser = req.user;
