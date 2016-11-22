@@ -63,7 +63,7 @@ app.get('/mobileon', function(req, res){
 });
 
 router.get('/auth/twitter/callback',
-  passportTwitter.authenticate('twitter', {successRedirect : '//mobileon', failureRedirect: '/login' }),
+  passportTwitter.authenticate('twitter', {successRedirect : '/mobileon', failureRedirect: '/login' }),
   function(req, res) {
     // Successful authentication
     console.log('success!');
