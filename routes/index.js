@@ -56,7 +56,7 @@ router.get('/login', function(req, res, next){
 
 router.get('/auth/twitter', passportTwitter.authenticate('twitter'));
 
-app.get('/mobileon', function(req, res){
+router.get('/mobileon', function(req, res){
   backURL=req.header('Referer') || '/';
   // do your thang
   res.redirect(backURL);
