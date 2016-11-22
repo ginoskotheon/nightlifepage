@@ -50,11 +50,12 @@ router.get('/login', function(req, res, next){
 
 router.get('/auth/twitter', passportTwitter.authenticate('twitter'));
 
-router.get('/auth/twitter/return',
+router.get('/auth/twitter/callback',
   passportTwitter.authenticate('twitter', { failureRedirect: '/login' }),
   function(req, res) {
     // Successful authentication
     console.log('success!');
+    console.log(req.body.ref_path)
     res.redirect(req.body.ref_path);
     // res.render('user/home');
   });
