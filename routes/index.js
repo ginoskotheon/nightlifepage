@@ -56,14 +56,9 @@ router.get('/login', function(req, res, next){
 
 router.get('/auth/twitter', passportTwitter.authenticate('twitter'));
 
-router.get('/mobileon', function(req, res){
-  backURL=req.header('Referer') || '/';
-  // do your thang
-  res.redirect(backURL);
-});
 
 router.get('/auth/twitter/callback',
-  passportTwitter.authenticate('twitter', {successRedirect : '/mobileon', failureRedirect: '/login' }),
+  passportTwitter.authenticate('twitter', { failureRedirect: '/login' }),
   function(req, res) {
     // Successful authentication
     console.log('success!');
@@ -173,7 +168,7 @@ module.exports = router;
 function isLoggedIn (req, res, next) {
 	if (req.isAuthenticated()) {
     
-		return next();
+		return res.back();
     
 	}
   
