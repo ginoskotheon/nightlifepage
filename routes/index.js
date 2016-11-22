@@ -154,7 +154,7 @@ router.post('/process', isLoggedIn, function(req, res, next){
     }
 
   });
-  res.redirect('back');
+  res.redirect('back', {ref_path: req.body.ref_path});
 });
 
 // router.get('/eventslogged', function(req, res, next){
