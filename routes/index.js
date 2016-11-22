@@ -60,7 +60,7 @@ router.get('/auth/twitter', passportTwitter.authenticate('twitter'));
 router.get('/auth/twitter/callback',
   passportTwitter.authenticate('twitter', { failureRedirect: '/login' }),
   function(req, res) {
-    var path = req.query.ref_path;
+    var path = req.params.ref_path;
     console.log(path);
     // Successful authentication
     console.log('success!');
