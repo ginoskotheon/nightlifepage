@@ -51,11 +51,11 @@ router.get('/login', function(req, res, next){
 router.get('/auth/twitter', passportTwitter.authenticate('twitter'));
 
 router.get('/auth/twitter/callback',
-  passportTwitter.authenticate('twitter', { failureRedirect: '/login' }),
+  passportTwitter.authenticate('twitter', {successRedirect: 'back', failureRedirect: '/login' }),
   function(req, res) {
     // Successful authentication
-
-    res.render('user/home');
+    console.log('success!');
+    // res.render('user/home');
   });
 
 
