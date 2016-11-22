@@ -48,6 +48,12 @@ router.get('/login', function(req, res, next){
   res.render('user/login', {layout: 'pre'});
 });
 
+router.get('/eventslogged', function(req, res, next){
+  res.render('user/eventslogged', { ref_path: req.query.ref })
+});
+
+
+
 router.get('/auth/twitter', passportTwitter.authenticate('twitter'));
 
 router.get('/auth/twitter/callback',
