@@ -62,7 +62,7 @@ router.get('/auth/twitter/callback',
     // Successful authentication
     console.log('success!');
     console.log(req.body.ref_path)
-    res.redirect(req.body.ref_path);
+    res.redirect('back');
     // res.render('user/home');
   });
 
