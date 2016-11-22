@@ -131,7 +131,7 @@ router.get('/auth/twitter/callback',
   
 router.post('/process', isLoggedIn, function(req, res, next){
   if(!isLoggedIn){
-    res.redirect('/auth/twitter');
+    res.redirect('/auth/twitter', {ref_path: req.body.ref_path});
   }
   var ans = req.body.userAttendingVenue;
   console.log(ans);
@@ -176,7 +176,7 @@ function isLoggedIn (req, res, next) {
     
 	}
   
-  res.redirect('/auth/twitter',{ref_path: req.body.ref_path} );
+  res.redirect('/auth/twitter' );
 }
 
 
