@@ -54,9 +54,8 @@ router.get('/auth/twitter/callback',
   passportTwitter.authenticate('twitter', { failureRedirect: '/login' }),
   function(req, res) {
     // Successful authentication
-    res.redirect(req.session.returnTo || '/');
-    delete req.session.returnTo;
-    // res.render('user/home');
+
+    res.render('user/home');
   });
 
 
@@ -162,7 +161,7 @@ module.exports = router;
 
 function isLoggedIn (req, res, next) {
 	if (req.isAuthenticated()) {
-    request.session.returnTo = request.path;
+    
 		return next();
     
 	}
