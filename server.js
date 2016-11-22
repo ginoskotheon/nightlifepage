@@ -9,6 +9,7 @@ var passport = require('passport');
 var session = require('express-session');
 var flash = require('connect-flash');
 var validator = require('express-validator');
+var MongoStore = require('connect-mongo')(session);
 var request = require('request');
 var Yelp = require('yelp');
 var OAuth = require('oauth');
@@ -30,9 +31,49 @@ require('./config/passport2');
 mongoose.connect('localhost:27017/nightlife');
 
 //view engine
-var handlebars = require('express-handlebars').create({defaultLayout: 'main'});
+var handlebars = require('express-handlebars').create({
+  helpers: {
+    equal: function(lvalue, rvalue, options){
+      if(arguments.length < 3) {
+      throw new Error("Handlebars needs to parameters");
+
+      }
+      if(lvalue!=rvalue){
+        return options.inverse(this);
+      } else {
+        return options.fn(this);
+      }
+    },
+    test: function(){return "hello!"}
+  },
+  defaultLayout: 'main'
+
+  });
+
+var handhelp = require('express-handlebars').create({
+  helpers: {
+    equal: function(lvalue, rvalue, options){
+      if(arguments.length < 3) {
+      throw new Error("Handlebars needs to parameters");
+
+      }
+      if(lvalue!=rvalue){
+        return options.inverse(this);
+      } else {
+        return options.fn(this);
+      }
+    },
+    test: function(){return 'Hello!'}
+  },
+
+  defaultLayout: 'main'
+});
+
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
+
+
+
 
 // middle ware
 // app.use(logger('dev'));
@@ -44,6 +85,7 @@ app.use(session({
   secret: 'twitterRouter',
   resave: false,
   saveUnintialized: false,
+  store: new MongoStore({mongooseConnection: mongoose.connection}),
   cookie: {secure: false,
   maxAge: 180 * 60 * 1000}
 }));
@@ -59,6 +101,7 @@ app.use(express.static(__dirname + '/public'));
 
 app.use(function(req, res, next){
   res.locals.login = req.isAuthenticated();
+  res.locals.session = req.session;
   next();
 });
 // app.use('/config', oauthRoute);

@@ -1,7 +1,29 @@
 body{
     background: orangered;
     font-family: tahoma;
-    color: #989898;
+    color: #fff;
+}
+
+#location {
+  color: #666;
+}
+
+#findButton {
+  color: orangered;
+}
+
+.navbar{
+  border: none;
+  background: orangered;
+}
+
+
+.nav.navbar-nav.navbar-right li a{
+  color: #666;
+}
+
+.nav.navbar-nav.navbar-right li a ul{
+  color: orangered;
 }
 
 #logoImg {
@@ -58,12 +80,38 @@ body{
   box-shadow: 0px 5px 10px rgba(0,0,0,0.5);
   margin-right: 10px;
 }
-.business-description{
+
+.info {
+  display: flex;
   line-height: 30px;
   margin-left: 40px;
   margin-top: 20px;
 }
-#going{
+.info .business-address {
+  display: none;
+
+}
+.info:hover .business-description {
+  display: none;
+
+}
+.info:hover .business-address {
+  display: inline;
+
+}
+/*.business-description{
+
+  line-height: 30px;
+  margin-left: 40px;
+  margin-top: 20px;
+
+}
+.business-description:hover{
+  opacity: 0;
+}*/
+
+
+.going{
   position: absolute;
   margin-left: 1000px;
   margin-top: 90px;

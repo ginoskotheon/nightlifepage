@@ -5,9 +5,8 @@ var Schema = mongoose.Schema;
 
 var User = new Schema({
 	twitter: {
-    consumerKey: String,
-    consumerSecret: String,
-    callbackURL: String
+    name: String,
+	  someID: String,
   },
 	venues: []
 });
