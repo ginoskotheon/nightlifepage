@@ -48,9 +48,9 @@ router.get('/login', function(req, res, next){
   res.render('user/login', {layout: 'pre'});
 });
 
-router.get('/eventslogged', function(req, res, next){
-  res.render('user/eventslogged', { ref_path: req.query.ref })
-});
+// router.get('/eventslogged', function(req, res, next){
+//   res.render('user/eventslogged', { ref_path: req.query.ref })
+// });
 
 
 
@@ -118,8 +118,8 @@ router.get('/auth/twitter/callback',
             savedSearch.push({"name": place.name, "going": place.going});
           });
           // console.log(savedSearch);
-          res.render( 'user/eventslogged', { data: json, going: savedSearch} );
-        });
+          res.render( 'user/eventslogged', { data: json, going: savedSearch, ref_path: req.query.ref} );
+        }); 
     });
 
   });
