@@ -11,7 +11,7 @@
 
 
         <form class="going" id="going" action="/process" method="POST">
-
+          <input type="hidden" class="ref_path" name='ref_path' value="{{ref_path}}">
           <input type="hidden" class="yelpId" name='yelpId' value="{{this.id}}">
           <input type="hidden" name='location' value='{{this.location.city}}'>
           <input class="decision" id="decision" type="submit" onclick="submitForms()" name='userAttendingVenue' value="Not Going" />

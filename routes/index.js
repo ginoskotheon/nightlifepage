@@ -62,7 +62,7 @@ router.get('/auth/twitter/callback',
   function(req, res) {
     // Successful authentication
     console.log('success!');
-    res.back();
+    res.redirect(req.body.ref_path);
     // res.render('user/home');
   });
 
@@ -77,6 +77,8 @@ router.get('/auth/twitter/callback',
   router.get( '/eventslogged', function( req, res ) {
 
     var loc = req.query.location;
+
+
     var params = {terms: 'bar', location: loc, sort: 2 };
     yelp(params, function( error, response, body ) {
       if ( error ) {
@@ -118,7 +120,7 @@ router.get('/auth/twitter/callback',
             savedSearch.push({"name": place.name, "going": place.going});
           });
           // console.log(savedSearch);
-          res.render( 'user/eventslogged', { data: json, going: savedSearch, ref_path: req.query.ref} );
+          res.render( 'user/eventslogged', { data: json, going: savedSearch, ref_path: req.url} );
         }); 
     });
 
@@ -153,9 +155,9 @@ router.post('/process', isLoggedIn, function(req, res, next){
   res.redirect('back');
 });
 
-router.get('/eventslogged', function(req, res, next){
-  res.render('user/eventslogged', { ref_path: req.query.ref })
-});
+// router.get('/eventslogged', function(req, res, next){
+//   res.render('user/eventslogged', { ref_path: req.query.ref })
+// });
 
 
 router.get('/logout', function(req, res, next){
