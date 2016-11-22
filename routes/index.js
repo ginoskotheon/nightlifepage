@@ -60,7 +60,7 @@ router.get('/auth/twitter', passportTwitter.authenticate('twitter'));
 router.get('/auth/twitter/callback',
   passportTwitter.authenticate('twitter', { failureRedirect: '/login' }),
   function(req, res) {
-    var path = req.body.ref_path;
+    var path = req.query.ref_path;
     console.log(path);
     // Successful authentication
     console.log('success!');
@@ -154,7 +154,7 @@ router.post('/process', isLoggedIn, function(req, res, next){
     }
 
   });
-  res.redirect('back', {ref_path: req.body.ref_path});
+  res.redirect('back');
 });
 
 // router.get('/eventslogged', function(req, res, next){
@@ -176,7 +176,7 @@ function isLoggedIn (req, res, next) {
     
 	}
   
-  res.redirect('/auth/twitter');
+  res.redirect('/auth/twitter',{ref_path: req.body.ref_path} );
 }
 
 
