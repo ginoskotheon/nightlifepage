@@ -4,6 +4,10 @@ body{
     color: #989898;
 }
 
+.navbar-header {
+  background: orangered;
+}
+
 #logoImg {
   padding: 50px;
 }
