@@ -162,11 +162,11 @@ module.exports = router;
 
 function isLoggedIn (req, res, next) {
 	if (req.isAuthenticated()) {
-    
+    request.session.returnTo = request.path;
 		return next();
     
 	}
-  request.session.returnTo = request.path;
+  
   res.redirect('/login');
 }
 
