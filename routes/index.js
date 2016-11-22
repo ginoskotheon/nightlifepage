@@ -177,7 +177,7 @@ function isLoggedIn (req, res, next) {
 	}
   var path = req.body.ref_path;
   console.log("loggin: ", path);
-  res.redirect('/auth/twitter', ref_path: path  );
+  res.redirect('/auth/twitter', {ref_path: path}  );
 }
 
 
