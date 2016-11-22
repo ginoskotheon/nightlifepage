@@ -56,13 +56,18 @@ router.get('/login', function(req, res, next){
 
 router.get('/auth/twitter', passportTwitter.authenticate('twitter'));
 
+app.get('/mobileon', function(req, res){
+  backURL=req.header('Referer') || '/';
+  // do your thang
+  res.redirect(backURL);
+});
+
 router.get('/auth/twitter/callback',
-  passportTwitter.authenticate('twitter', {successRedirect : '/eventslogged', failureRedirect: '/login' }),
+  passportTwitter.authenticate('twitter', {successRedirect : '//mobileon', failureRedirect: '/login' }),
   function(req, res) {
     // Successful authentication
     console.log('success!');
-    console.log(req.body.ref_path)
-    res.redirect('back');
+  
     // res.render('user/home');
   });
 
