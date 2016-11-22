@@ -53,8 +53,10 @@ router.get('/auth/twitter/callback',
   passportTwitter.authenticate('twitter', { failureRedirect: '/login' }),
   function(req, res) {
     // Successful authentication
-
-    res.render('user/home');
+    res.redirect(req.session.returnTo || '/');
+    req.session.returnTo = null;
+    delete req.session.returnTo;
+    // res.render('user/home');
   });
 
 
@@ -68,6 +70,7 @@ router.get('/auth/twitter/callback',
   
 
   router.get( '/eventslogged', isLoggedIn, function( req, res ) {
+
     var loc = req.query.location;
     var params = {terms: 'bar', location: loc, sort: 2 };
     yelp(params, function( error, response, body ) {
@@ -158,6 +161,7 @@ function isLoggedIn (req, res, next) {
 	if (req.isAuthenticated()) {
 		return next();
 	}
+  request.session.returnTo = request.path; 
   res.redirect('/');
 }
 
@@ -166,5 +170,5 @@ function notLoggedIn(req, res, next){
   if(!req.isAuthenticated()){
   return next();
   }
-  res.redirect('/');
+  res.redirect('/login');
 }
