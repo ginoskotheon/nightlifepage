@@ -62,7 +62,7 @@ router.get('/auth/twitter/callback',
   function(req, res) {
     // Successful authentication
     console.log('success!');
-  
+    return res.back();
     // res.render('user/home');
   });
 
@@ -168,7 +168,7 @@ module.exports = router;
 function isLoggedIn (req, res, next) {
 	if (req.isAuthenticated()) {
     
-		return res.back();
+		return next();
     
 	}
   
