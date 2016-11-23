@@ -5,6 +5,7 @@ var path = require('path');
 
 var cookieParser = require('cookie-parser');
 var request = require('request');
+var session = require('express-session');
 var mongoose = require('mongoose');
 var objectId = new mongoose.Schema.ObjectId;
 var bodyParser = require('body-parser');
@@ -64,7 +65,7 @@ router.get('/auth/twitter/callback',
     console.log(path);
     // Successful authentication
     console.log('success!');
-    res.redirect('back');
+    res.redirect(req.session.url);
     // res.render('user/home');
   });
 
@@ -81,6 +82,7 @@ router.get('/auth/twitter/callback',
     var loc = req.query.location;
 
     var path = req.url;
+    console.log(path);
     var params = {terms: 'bar', location: loc, sort: 2 };
     yelp(params, function( error, response, body ) {
       if ( error ) {
@@ -176,8 +178,7 @@ function isLoggedIn (req, res, next) {
 		return next();
     
 	}
-  var path = req.body.ref_path;
-  console.log("loggin: ", path);
+  req.session.url = req.url;
   res.redirect('/auth/twitter' );
 }
 
