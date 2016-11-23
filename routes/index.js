@@ -80,7 +80,7 @@ router.get('/auth/twitter/callback',
   router.get( '/eventslogged', function( req, res ) {
 
     var loc = req.query.location;
-
+    req.session.url = req.url;
     var path = req.url;
     console.log(path);
     var params = {terms: 'bar', location: loc, sort: 2 };
@@ -178,7 +178,7 @@ function isLoggedIn (req, res, next) {
 		return next();
     
 	}
-  req.session.url = req.url;
+  
   res.redirect('/auth/twitter' );
 }
 
