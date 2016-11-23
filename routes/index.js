@@ -124,7 +124,7 @@ router.get('/auth/twitter/callback',
             savedSearch.push({"name": place.name, "going": place.going});
           });
           // console.log(savedSearch);
-          res.render( 'user/eventslogged', { data: json, going: savedSearch, ref_path: path} );
+          res.render( 'user/eventslogged', { data: json, going: savedSearch, user: req.user} );
         }); 
     });
 
