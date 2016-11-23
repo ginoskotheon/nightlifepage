@@ -7,6 +7,7 @@ $(document).ready(function(){
   submitForms = function(){
     document.getElementById("going").submit();
     document.getElementById("attending").submit();
+    document.getElementById("path").submit();
   }
 
 
@@ -15,6 +16,8 @@ $(document).ready(function(){
               var myloc = $('#location').val();
   });
 
+  var path = $(".path").find("input[name='ref_path']").val();
+  console.log(path);
   $(".attending").each(function(index, item){
     var match = $( this ).find("input[name='name']").val();
     var val = $( this ).find("input[name='attendence']").val();
@@ -33,7 +36,10 @@ $(document).ready(function(){
         subButton.val("Not Going");
         }
     });
+
   });
+
+
 });
 //   $(document).on('click', '#decision', function(){
 //     // console.log($(this).val());

@@ -1,7 +1,9 @@
 require('dotenv').config();
 var express = require('express');
+var path = require('path');
 var router = express.Router();
 var cookieParser = require('cookie-parser');
+var session = require('express-session');
 var request = require('request');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
@@ -36,8 +38,13 @@ router.get('/auth/twitter/callback',
 
   });
 
+
   router.get('/events', function( req, res ) {
     var loc = req.query.location;
+    var path = req.url;
+    console.log(path);
+    req.session.url = req.url;
+
     var params = {terms: 'bar', location: loc, sort: 2 };
     yelp(params, function( error, response, body ) {
       if ( error ) {
@@ -79,8 +86,9 @@ router.get('/auth/twitter/callback',
             savedSearch.push({"name": place.name, "going": place.going});
           });
           // console.log(savedSearch);
-          res.render( 'user/events', { data: json, going: savedSearch} );
+          res.render( 'user/events', { data: json, going: savedSearch, ref_path: path, user: req.user} );
         });
+
     });
 
   });
@@ -118,7 +126,8 @@ router.get('/auth/twitter/callback',
 
 router.post('/process', function(req, res, next){
   var ans = req.body.userAttendingVenue;
-  // console.log(ans);
+
+  console.log(ans);
   // console.log(req.body.yelpId);
   var location = req.body.location;
   // console.log(location);
@@ -157,9 +166,18 @@ function isLoggedIn (req, res, next) {
   res.redirect('/');
 }
 
+
 function notLoggedIn(req, res, next){
   if(!req.isAuthenticated()){
   return next();
   }
   res.redirect('/');
 }
+
+// function getURL(req, res, next){
+//
+//   console.log("dude", req.session.url);
+//   res.redirect('/login');
+//   // return arr;
+//   // return next();
+// }
